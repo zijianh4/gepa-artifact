@@ -83,8 +83,7 @@ def get_optimizers():
     from gepa_artifact.gepa.gepa import GEPA
     from dspy.teleprompt.grpo import GRPO
     from gepa_artifact.utils.optimizers import OptimizerConfig
-    from gepa_artifact.utils.robust_grpo import RobustGRPO
-    from gepa_artifact.utils.grpo_skip_no_diversity_simple import GRPOSkipNoDiversitySimple
+
     optimizers = [
         ("Baseline", 
             OptimizerConfig(
@@ -196,83 +195,6 @@ def get_optimizers():
                 name="GRPO",
             )
         ),
-        # (
-        #     "RobustGRPO",
-        #     OptimizerConfig(
-        #         optimizer=RobustGRPO,
-        #         init_args=dict(
-        #             multitask=True,
-        #             exclude_demos=False,
-        #             num_train_steps=500,
-        #             num_threads=25,
-        #             use_train_as_val=False,
-        #             num_steps_for_val=20,
-        #             sampling_temperature=0.8,  # Higher default temperature
-        #             num_dspy_examples_per_grpo_step=4,
-        #             num_rollouts_per_grpo_step=12,  # More rollouts for diversity
-        #             grpo_group_size=12,
-        #             report_train_scores=False,
-        #             variably_invoked_predictor_grouping_mode="fill",
-        #             variably_invoked_predictor_fill_strategy="randint",
-        #             max_context_length=MAX_CONTEXT_LENGTH_TRAINING,
-        #             # Robust GRPO specific parameters
-        #             handle_diversity_issues=True,
-        #             auto_adjust_temp=True,
-        #             min_temperature=0.8,
-        #             max_temperature=1.5,
-        #             temp_increment=0.2,
-        #             min_rollouts=12,
-        #         ),
-        #         compile_args=dict(),
-        #         langProBe_configs=dict(
-        #             use_valset=True,
-        #             add_valset_to_trainset=False,
-        #             use_model_name_from_optimized_program=True,
-        #             set_lm_before_optimizer=True,
-        #             launch_arbor=True,
-        #             add_wandb_configs_to_initargs=True,
-        #         ),
-        #         name="RobustGRPO",
-        #     )
-        # ),
-        # (
-        #     "GRPOSkipNoDiversity",
-        #     OptimizerConfig(
-        #         optimizer=GRPOSkipNoDiversitySimple,
-        #         init_args=dict(
-        #             multitask=True,
-        #             exclude_demos=False,
-        #             num_train_steps=500,
-        #             num_threads=25,
-        #             use_train_as_val=False,
-        #             num_steps_for_val=20,  # Checkpoint every 100 steps instead of 20
-        #             sampling_temperature=SAMPLING_TEMPERATURE,  # Keep original 0.6 temperature
-        #             num_dspy_examples_per_grpo_step=4,
-        #             num_rollouts_per_grpo_step=12,  # Keep original rollouts
-        #             grpo_group_size=12,
-        #             report_train_scores=False,
-        #             variably_invoked_predictor_grouping_mode="fill",
-        #             variably_invoked_predictor_fill_strategy="randint",
-        #             max_context_length=MAX_CONTEXT_LENGTH_TRAINING,
-        #             # Skip no diversity specific parameters
-        #             skip_no_diversity_groups=True,
-        #             max_skipped_groups_per_step=5,
-        #             max_skipped_groups_total=50,
-        #             # Disable checkpointing to avoid hangs
-        #             checkpoint_on_validation_improvement=False,
-        #         ),
-        #         compile_args=dict(),
-        #         langProBe_configs=dict(
-        #             use_valset=True,
-        #             add_valset_to_trainset=False,
-        #             use_model_name_from_optimized_program=True,
-        #             set_lm_before_optimizer=True,
-        #             launch_arbor=True,
-        #             add_wandb_configs_to_initargs=True,
-        #         ),
-        #         name="GRPOSkipNoDiversity",
-        #     )
-        # ),
     ]
 
     return optimizers
