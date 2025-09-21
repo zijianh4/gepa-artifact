@@ -55,12 +55,12 @@ LM_CONFIGS = [
         "launch_kwargs": LAUNCH_KWARGS,
         "train_kwargs": TRAIN_KWARGS_GRPO_QWEN,
     },
-    # {
-    #     "name": "gpt-41-mini",
-    #     "model": "openai/gpt-4.1-mini-2025-04-14",
-    #     "api_key": "env:OPENAI_API_KEY",
-    #     "temperature": 1.0,
-    # },
+    {
+        "name": "gpt-41-mini",
+        "model": "openai/gpt-4.1-mini-2025-04-14",
+        "api_key": "env:OPENAI_API_KEY",
+        "temperature": 1.0,
+    },
 ]
 
 def get_benchmarks():
@@ -72,10 +72,11 @@ def get_benchmarks():
     from gepa_artifact.benchmarks.AIME import benchmark as aime_metas
     from gepa_artifact.benchmarks.AIME_Extended import benchmark as aime_extended_metas
     from gepa_artifact.benchmarks.MATH import benchmark as math_bench_metas
+    from gepa_artifact.benchmarks.MMLU_STEM import benchmark as mmlu_stem_metas
 
     from gepa_artifact.utils.optimizers import OptimizerConfig
 
-    benchmark_metas = hover_metas + hotpotQA_metas + papillon_metas + ifbench_metas + math_metas + aime_metas + aime_extended_metas + math_bench_metas
+    benchmark_metas = hover_metas + hotpotQA_metas + papillon_metas + ifbench_metas + math_metas + aime_metas + aime_extended_metas + math_bench_metas + mmlu_stem_metas
     return benchmark_metas
 
 def get_optimizers():
@@ -209,6 +210,7 @@ def get_max_invocations(bench, prog, model, opt):
         ('AIMEBench', 'CoT', 'MIPROv2-Heavy'): 1839,
         ('AIMEExtendedBench', 'CoT', 'MIPROv2-Heavy'): 1839,
         ('MATHBench', 'CoT', 'MIPROv2-Heavy'): 1839,
+        ('MMLUSTEMBench', 'MMLUSTEMProgram', 'MIPROv2-Heavy'): 1839,
     }
 
     if (bench, prog, opt) in known_max_calls:
