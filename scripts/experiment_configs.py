@@ -210,7 +210,7 @@ def get_max_invocations(bench, prog, model, opt):
         ('AIMEBench', 'CoT', 'MIPROv2-Heavy'): 1839,
         ('AIMEExtendedBench', 'CoT', 'MIPROv2-Heavy'): 1839,
         ('MATHBench', 'CoT', 'MIPROv2-Heavy'): 1839,
-        ('MMLUSTEMBench', 'MMLUSTEMProgram', 'MIPROv2-Heavy'): 1839,
+        ('MMLUSTEMBench', 'CoT', 'MIPROv2-Heavy'): 1839,
     }
 
     if (bench, prog, opt) in known_max_calls:
